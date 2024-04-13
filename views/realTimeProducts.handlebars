@@ -1,0 +1,43 @@
+<div id="list-products">
+   
+</div>
+
+<section style="display: flex;">
+  <form id="myForm" action="/chats/products" method="post">
+    <!-- Tus campos de entrada aquí -->
+    <h2>AGREGAR PRODUCTO</h2>
+    <label for="title">Título:</label><br>
+    <input type="text" id="title" name="title" required><br>
+    
+    <label for="description">Descripción:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+    
+    <label for="price">Precio:</label><br>
+    <input type="number" id="price" name="price" required><br>
+    
+    <label for="thumbnail">Thumbnail:</label><br>
+    <input type="file" id="thumbnail" name="thumbnail"><br>
+    
+    <label for="code">Código:</label><br>
+    <input type="text" id="code" name="code" required><br>
+    
+    <label for="stock">Stock:</label><br>
+    <input type="number" id="stock" name="stock" required><br>
+    
+    <label for="category">Categoría:</label><br>
+    <input type="text" id="category" name="category" required><br>
+    
+    <input type="submit" value="Submit">
+</form>  
+    <form id="deleteProduct" action="/chats/products/{{ pid }}" method="DELETE" style="margin-left:20px">
+    <h2>ELIMINAR PRODUCTO</h2>
+    <label for="pid">Id Del Producto</label><br>
+    <input type="number" id="pid" name="pid" required><br>
+    <input type="submit" value="Eliminar Producto">
+</form>
+
+</section>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/realTimeProducts.js"></script>
