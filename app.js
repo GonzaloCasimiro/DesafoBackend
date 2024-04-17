@@ -16,13 +16,14 @@ const CarManager=require('./CarManager')
 const nuevoProductManager=new ProductManager('productos.json');
 const carManager=new CarManager("cars.json");
 const app=express();
+const PORT=process.env.PORT || 8080
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/products',productsRouter);
 app.use('/carts',carRouter);
 app.use('/chats',viewRouter)
 //GUARDAR EN UNA CONSTANTE EL SERVIDOR
-const htppServer=app.listen(8080,error=>{
+const htppServer=app.listen(PORT,error=>{
     console.log("Escuchando servidor en puerto 8080");
 }).on("error", function (err) {
     process.once("SIGUSR2", function () {
