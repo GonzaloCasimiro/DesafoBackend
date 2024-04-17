@@ -48,7 +48,13 @@ viewRouter.delete('/:pid',async(req,res)=>{
         res.send(error);
     }
 })
-
+viewRouter.get('/indexb',async(req,res)=>{
+    try {
+        res.render('indexb')
+    } catch (error) {
+        res.send(error)
+    }
+})
 
 
 

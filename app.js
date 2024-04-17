@@ -7,7 +7,9 @@ const uploader=require("./multer.js")
 const handlebars=require('express-handlebars')
 const socket=require('socket.io')
 const {Server}=require('socket.io')
-//import {__dirname} from './utils.js/          => UTILS.JS // EN CASO DE USAR IMPORT EN VEZ DE REQUIRE
+const {productsSocket} =require('./utils/productSocket.js')
+//import {productsSocket} from './utils/productSocket.js'
+//import {__dirname} from './utils/utils.js/          => UTILS.JS // EN CASO DE USAR IMPORT EN VEZ DE REQUIRE
 const ProductManager=require('./ProductManager');
 const CarManager=require('./CarManager')
 
@@ -32,8 +34,8 @@ const htppServer=app.listen(8080,error=>{
     });
   });
 // CREAMOS SERVER SOCKET PARA EL SERVIDOR
-const socketServer=new Server(htppServer)
-
+const io=new Server(htppServer)
+app.use(productsSocket(io))
 app.use('/static', express.static(__dirname+'/public'))//ESTO ES DINAMICO,FUNCIONA EN CUALQUIER FOLDER POR DIRNAME
 //app.use(express.static(__dirname+'/public'))
 app.engine('handlebars',handlebars.engine())
@@ -54,31 +56,42 @@ app.use('/subir-archivo', uploader.single('myFile'),(req,res)=>{
     }
 })
 
-
-socketServer.on ('connection',async socket=>{
-    
+/*
+io.on ('connection',async socket=>{
+ 
 const listaDeProductos=await nuevoProductManager.readFile();
-socketServer.emit('listaDeProductos',listaDeProductos);
+io.emit('listaDeProductos',listaDeProductos);
 
 
-socket.on('producto_nuevo',nuevoProducto=>{
+io.on('producto_nuevo',nuevoProducto=>{
     listaDeProductos.push(nuevoProducto)
     socketServer.emit('listaDeProductos',listaDeProductos);
 })
     
-socket.on('producto_eliminado',data=>{
+io.on('producto_eliminado',data=>{
     const{pid}=data
     listaDeProductos=listaDeProductos.filter(producto=>producto.id!==pid)
-    socketServer.emit('listaDeProductos',listaDeProductos)
+    io.emit('listaDeProductos',listaDeProductos)
 })
 })
- 
+*/
+ let messages=[]
+io.on('connection',socket=>{
+    console.log('cliente conectado')
+    socket.on('message',data=>{
+        console.log('message data: ',data )
+        messages.push(data)
+    io.emit('messageLogs',messages)
+        })
+    })
+
+    //emitimos mensaje
+    
 
 
 
 /*
-
-socketServer.on ('connection',async socket=>{
+io.on ('connection',async socket=>{
 
 console.log('nuevo cliente conectado')
    

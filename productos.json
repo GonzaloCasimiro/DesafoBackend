@@ -77,17 +77,6 @@
 		"category": "Electrónica"
 	},
 	{
-		"id": 9,
-		"title": "Papel bond A4",
-		"description": "Paquete de 200 hojas de papel bond tamaño A4",
-		"price": 200,
-		"thumbnail": "#",
-		"code": 108,
-		"stock": 40,
-		"status": true,
-		"category": "Oficina"
-	},
-	{
 		"id": 10,
 		"title": "Osito",
 		"description": "Paralalalalalalla",
