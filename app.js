@@ -57,7 +57,7 @@ app.use('/subir-archivo', uploader.single('myFile'),(req,res)=>{
     }
 })
 
-/*
+
 io.on ('connection',async socket=>{
  
 const listaDeProductos=await nuevoProductManager.readFile();
@@ -75,7 +75,7 @@ io.on('producto_eliminado',data=>{
     io.emit('listaDeProductos',listaDeProductos)
 })
 })
-*/
+
  let messages=[]
 io.on('connection',socket=>{
     console.log('cliente conectado')
